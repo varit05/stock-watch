@@ -29,15 +29,14 @@ export const callStep2 = async () => {
       marginUsed,
       netAvailableMargin,
     ]);
-    console.log("rows", rows);
+    console.log(`Calling step 3 after ${TIMEOUT} `);
     setTimeout(() => {
-      console.log("calling step 3 after 2 minutes");
       callStep3();
     }, TIMEOUT);
   } catch (error) {
     console.log("Error in step 2:", error);
+    console.log("calling step 1 after 2 minutes");
     setTimeout(() => {
-      console.log("calling step 1 after 2 minutes");
       callStep1();
     }, TIMEOUT);
   }

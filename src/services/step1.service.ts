@@ -30,15 +30,14 @@ export const callStep1 = async () => {
         loginResponse.data.sessionToken;
       return config;
     });
-
+    console.log(`Calling step 2 after ${TIMEOUT} `);
     setTimeout(() => {
-      console.log("calling step 2");
       callStep2();
     }, TIMEOUT);
   } catch (error) {
     console.log("error in login", error);
+    console.log(`Calling step 1 after ${TIMEOUT} `);
     setTimeout(() => {
-      console.log("calling step 1 after 2 minutes");
       callStep1();
     }, TIMEOUT);
   }

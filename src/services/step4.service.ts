@@ -20,20 +20,10 @@ export const callStep4 = async () => {
     configRows = Object.values(JSON.parse(JSON.stringify(configRows)));
 
     console.log({ configRows });
-
-    // configRows.forEach(async (row: any, index: number) => {
-    for (const row of configRows) {
-      console.time("call get quote:");
-      const getQuoteData: any = await axiosConfig.get(
-        `${API_ROUTES.GETQUOTE}${row.SymbolName}`
-      );
-      await connectToDB(InsertQueryMW, [
-        getQuoteData.data.serverTime,
-        getQuoteData.data.tradingSymbol,
-        getQuoteData.data.lastTradedPrice,
-      ]);
-      // Update the existing data to mysql table MW
-      console.time(`added data to db`);
+    let n = 0;
+    while (n < configRows.length) {
+      await processData(configRows[n]);
+      n++;
     }
     setTimeout(() => {
       console.log("calling step 5 after 2 minutes");
@@ -47,3 +37,15 @@ export const callStep4 = async () => {
     }, TIMEOUT);
   }
 };
+
+async function processData(row: any) {
+  console.time("call get quote:");
+  const getQuoteData: any = await axiosConfig.get(
+    `${API_ROUTES.GETQUOTE}${row.SymbolName}`
+  );
+  await connectToDB(InsertQueryMW, [
+    getQuoteData.data.serverTime,
+    getQuoteData.data.tradingSymbol,
+    getQuoteData.data.lastTradedPrice,
+  ]);
+}

@@ -1,0 +1,32 @@
+<section id="header" class="jumbotron text-center">
+    <h1 class="display-3"> {{title}} </h1>
+</section>
+
+<!--To view car inventory-->
+<div class="container">
+    {{#each sales}}
+    <div style="width:48%;float:left;padding: 5px">
+        {{#each this}}
+        {{#if BKPR}}
+        <h3>BKPR: {{ BKPR }}</h3>
+        {{/if}}
+        {{#if TS}}
+        <h3>TS: {{ TS }}</h3>
+        {{/if}}
+        {{#if MGN}}
+        <h3>MGN: {{ MGN }}</h3>
+        {{/if}}
+        {{#if BQTotal}}
+        <h3>BQTotal: {{ BQTotal }}</h3>
+        {{/if}}
+        {{#if NQTotal}}
+        <h3>NQTotal: {{ NQTotal }}</h3>
+        {{/if}}
+        {{#if SQTotal}}
+        <h3>SQTotal: {{ SQTotal }}</h3>
+        {{/if}}
+
+        {{/each}}
+    </div>
+    {{/each}}
+</div>
